@@ -1,6 +1,6 @@
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import { useEffect, useState } from "react";
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import Todo from "./Todo";
 function App() {
@@ -21,15 +21,20 @@ function App() {
     return ()=> unsubscribe();
   },[])
   //update todo
+  const toggleComplete = async (todo) => {
+    await updateDoc(doc(db, "todos",todo.id), {
+      complated:!todo.complated,
+    })
+  };
   //delete todo
 
   return (
     <div className="h-[100vh] bg-gray-100 py-12 flex items-center justify-center">
       <div className="w-[500px] h-full  flex flex-col gap-6">
-        <div className="flex-1 p-3 bg-white shadow-2xl rounded-xl border">
+        <div className="overflow-y-auto flex-1 flex flex-col gap-2 p-3 bg-white shadow-2xl rounded-xl border">
           {
             todos.map((todo) => (
-              <Todo key={todo.id} text={todo.text} complated={todo.complated} />
+              <Todo toggleComplete={toggleComplete}  key={todo.id} todo={todo} />
             ))
           }
         </div>

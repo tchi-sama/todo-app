@@ -1,8 +1,8 @@
-function Todo({text , complated}) {
+function Todo({todo , toggleComplete}) {
   return (
-    <div className="bg-gray-100 border rounded-lg p-4 flex ">
-        <p htmlFor="checkbox" className="flex-1">{text}</p>
-        <input type="checkbox" name="" id="checkbox" />
+    <div onClick={()=>toggleComplete(todo)} className="bg-gray-100 border rounded-lg p-2 gap-2 flex ">
+        <input checked={todo.complated} type="checkbox" name="" id="checkbox" />
+        <p htmlFor="checkbox" className="flex-1 p-2">{todo.text}</p>
     </div>
   )
 }
