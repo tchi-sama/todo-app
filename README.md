@@ -1,1 +1,1 @@
-#learing firebase with making a todo list app with firebase for database 
+#learing firebase with making a todo list app with firebase for database , just crud app
